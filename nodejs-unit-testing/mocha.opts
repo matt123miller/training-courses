@@ -1,0 +1,6 @@
+
+--recursive "./lib/*.test.js"
+--require should
+--reporter dot
+--ui bdd
+--timeout 5000
