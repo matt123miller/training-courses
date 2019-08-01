@@ -4,10 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "node node_modules/mocha/bin/mocha test/test.js"
+    "test": "mocha \"./src/**/*.test.js\" --timeout 5000"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {},
-  "devDependencies": {}
+  "devDependencies": {
+    "mocha": "^6.2.0"
+  }
 }
