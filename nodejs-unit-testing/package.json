@@ -4,15 +4,18 @@
   "main": "index.js",
   "scripts": {
     "test": "cross-env NODE_ENV=development mocha \"./lib/**/*.test.js\" --exit",
-    "test2": "mocha \"./tests/**/*.js\" --recursive",
+    "test2": "mocha \"./lib/**/*.test.js\" --recursive",
+    "test-api": "mocha \"./example-express-api/**/*.test.js\" --recursive",
     "coverage": "cross-env NODE_ENV=development nyc --reporter=text npm test"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "body-parser": "^1.19.0",
     "chai": "^4.1.2",
     "chai-as-promised": "^7.1.1",
     "cross-env": "^5.1.6",
+    "dotenv": "^8.0.0",
     "istanbul": "^0.4.5",
     "mocha": "^5.2.0",
     "nyc": "^12.0.1",
@@ -26,18 +29,15 @@
     "mongoose": "^5.4.15"
   },
   "description": "",
-  "mocha":
-      {
-        "diff": true,
-        "extension": [
-            "test.js"
-        ],
-        
-        "package": "./package.json",
-        "reporter": "spec",
-        "slow": 75,
-        "timeout": 5000,
-        "ui": "bdd"
-    }
-  
+  "mocha": {
+    "diff": true,
+    "extension": [
+      "test.js"
+    ],
+    "package": "./package.json",
+    "reporter": "spec",
+    "slow": 75,
+    "timeout": 5000,
+    "ui": "bdd"
+  }
 }
