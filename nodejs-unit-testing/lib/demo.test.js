@@ -1,5 +1,5 @@
-const chai = require('chai');
-const expect = chai.expect;
+const {expect} = require('chai');
+
 
 var demo = require('./demo');
 
@@ -35,6 +35,13 @@ describe('demo', () => {
             });
         });
 
+
+        it('should return the adding promise', () => {
+            return demo.addPromise(2, 2).then(res => {
+
+                expect(res).to.equal(4);
+            });
+        });
         it('should add with a waiting promise', (done) => {
             console.log('about to being waiting');
             demo.addWaitingPromise(4,8)
