@@ -3,6 +3,10 @@ const User = require('./models/user');
 
 const mailer = require('./mailer');
 
+/**
+ * @param {string} id
+ * @param {function(Error, {})} callback
+ */
 exports.get = function (id, callback) {
     if (!id) {
         return callback(new Error('Invalid user id'));
