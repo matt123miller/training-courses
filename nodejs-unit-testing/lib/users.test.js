@@ -213,4 +213,26 @@ describe('users', () => {
             expect(users.update(123, { age: 35 })).to.eventually.be.rejectedWith('fake');
         });
     });
+
+    context('reset password', () => {
+        
+        let resetStub;
+
+        beforeEach(() => {
+            resetStub = sandbox.stub(mailer, 'sendPasswordResetEmail').resolves('reset');
+        });
+        
+        it('should check for email field', async () => {
+            
+            await expect( users.resetPassword()).to.eventually.be.rejectedWith('Invalid email');
+        });
+
+        it('should send a password reset email', async () => {
+            const result = await users.resetPassword('a@b.com');
+
+            expect(result).to.equal('reset')
+            expect(resetStub).to.have.been.calledOnce;
+            expect(resetStub).to.have.been.calledWith('a@b.com')
+        })
+    });
 });
