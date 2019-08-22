@@ -190,4 +190,26 @@ describe('users', () => {
         });
 
     });
+
+    context('update user', () => {
+
+        it('should call findById', async () => {
+            await users.update(123, { age: 35 });
+
+            expect(findStub).to.have.been.calledOnce;
+            expect(findStub).to.have.been.calledWith(123);
+        });
+
+        it('should call user.save', async () => {
+            await users.update(123, { age: 35 });
+
+            expect(sampleUser.save).to.have.been.calledOnce;
+        });
+
+        it('should reject errors', () => {
+            findStub.throws(new Error('fake'))
+
+            expect(users.update(123, { age: 35 })).to.eventually.be.rejectedWith('fake');
+        });
+    });
 });
