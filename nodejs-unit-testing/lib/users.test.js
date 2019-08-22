@@ -25,11 +25,12 @@ describe('users', () => {
 
     beforeEach(() => {
         sampleUser = {
-            id: 'abc',
+            id: 123,
             name: 'Matt',
-            email: 'matt@simpleclick.com'
+            email: 'matt@simpleclick.com',
+            save: sandbox.stub().resolves()
         };
- 
+
         findStub = sandbox.stub(mongoose.Model, 'findById').resolves(sampleUser);
         deleteStub = sandbox.stub(mongoose.Model, 'remove').resolves('fake_remove');
         mailerStub = sandbox.stub(mailer, 'sendWelcomeEmail').resolves('email sent');
@@ -51,12 +52,12 @@ describe('users', () => {
 
         it('should call findUserById with id and return result', (done) => {
             sandbox.restore();
-            let stub = sandbox.stub(mongoose.Model, 'findById').yields(null, {name:'Matt'});
+            let stub = sandbox.stub(mongoose.Model, 'findById').yields(null, { name: 'Matt' });
 
-            users.get('abc', (err, result) => {
+            users.get(123, (err, result) => {
                 expect(err).to.not.exist;
                 expect(stub).to.have.been.calledOnce;
-                expect(stub).to.have.been.calledWith('abc');
+                expect(stub).to.have.been.calledWith(123);
                 expect(result).to.be.a('object');
                 expect(result).to.have.property('name').to.equal('Matt');
 
@@ -86,8 +87,8 @@ describe('users', () => {
     context('create user', () => {
         it('should reject invalid args', async () => {
             await expect(users.create()).to.eventually.be.rejectedWith('Invalid arguments');
-            await expect(users.create({name: 'without email'})).to.eventually.be.rejectedWith('Invalid arguments');
-            await expect(users.create({email: 'without@name.com'})).to.eventually.be.rejectedWith('Invalid arguments');
+            await expect(users.create({ name: 'without email' })).to.eventually.be.rejectedWith('Invalid arguments');
+            await expect(users.create({ email: 'without@name.com' })).to.eventually.be.rejectedWith('Invalid arguments');
         });
 
         it('should create a user', async () => {
@@ -97,27 +98,27 @@ describe('users', () => {
 
     context('delete user', () => {
         it('should check for an id, returning an error when none provided', () => {
-            
+
             return users.delete()
-            .then(result => {
-                throw new Error('unexpected success');
-            })
-            .catch(err => {
-                expect(err).to.exist;
-                expect(err).to.be.instanceOf(Error);
-                expect(err.message).to.not.equal('unexpected success');
-                expect(err.message).to.equal('Invalid id');
-            })
+                .then(result => {
+                    throw new Error('unexpected success');
+                })
+                .catch(err => {
+                    expect(err).to.exist;
+                    expect(err).to.be.instanceOf(Error);
+                    expect(err.message).to.not.equal('unexpected success');
+                    expect(err.message).to.equal('Invalid id');
+                })
         });
 
         it('should check for error using eventually plugin', () => {
-            
+
             return expect(users.delete()).to.eventually.be.rejectedWith('Invalid id');
         });
-        
+
 
         it('should internally call User.Remove', async () => {
-            
+
             const result = await users.delete(123);
 
             // Because users.delete internally calls mongoose.Model.Remove which we've stubbed
@@ -125,7 +126,7 @@ describe('users', () => {
             expect(result).to.equal('fake_remove');
             // We want to check if the id we supplied is correctly pass to the .remove() function
             // The stub we wrote that replaces .remove() will track it's interactions
-            expect(deleteStub).to.have.been.calledWith({_id: 123});
+            expect(deleteStub).to.have.been.calledWith({ _id: 123 });
         });
     });
 
@@ -157,10 +158,10 @@ describe('users', () => {
         });
 
         it('should reject invalid args', () => {
-        
+
             expect(users.create()).to.eventually.be.rejectedWith('Invalid arguments');
-            expect(users.create({email:'a@b.com'})).to.eventually.be.rejectedWith('Invalid arguments');
-            expect(users.create({name:'matt'})).to.eventually.be.rejectedWith('Invalid arguments');
+            expect(users.create({ email: 'a@b.com' })).to.eventually.be.rejectedWith('Invalid arguments');
+            expect(users.create({ name: 'matt' })).to.eventually.be.rejectedWith('Invalid arguments');
         });
 
         it('should call User with new keyword', () => {
