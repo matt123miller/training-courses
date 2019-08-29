@@ -4,7 +4,6 @@
   "main": "index.js",
   "scripts": {
     "test": "cross-env NODE_ENV=development mocha \"./lib/**/*.test.js\" --exit",
-    "test2": "mocha \"./lib/**/*.test.js\" --recursive",
     "test-api": "mocha \"./example-express-api/**/*.test.js\" --recursive",
     "coverage": "cross-env NODE_ENV=development nyc --reporter=text npm test"
   },
