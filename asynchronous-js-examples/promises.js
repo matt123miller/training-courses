@@ -54,34 +54,34 @@ request(baseUrl + '?limit=20&offset=0', { json: true })
 
 
 
-// request(baseUrl + '?limit=20&offset=0', { json: true })
-//     .then(data => {
-//         pokeList.push(...data.results)
-//         console.log(data);
+request(baseUrl + '?limit=20&offset=0', { json: true })
+    .then(data => {
+        pokeList.push(...data.results)
+        console.log(data);
 
-//         data.error = true;
+        data.error = true;
 
-//         return data;
-//     })
-//     .then(data => {
-//         if (data.error === true) {
+        return data;
+    })
+    .then(data => {
+        if (data.error === true) {
 
-//             throw new Error('an error has happened :(')
-//         }
-//         return data
-//     })
-//     .then(data => {
-//         console.log(data)
-//     })
-//     .catch(error => {
+            throw new Error('an error has happened :(')
+        }
+        return data
+    })
+    .then(data => {
+        console.log(data)
+    })
+    .catch(error => {
 
-//         console.log(error);
+        console.log(error);
 
-//     })
-//     .finally(() => {
-//         // resetting our data for this example
-//         pokeList = [];
-//     })
+    })
+    .finally(() => {
+        // resetting our data for this example
+        pokeList = [];
+    })
 
 
 
