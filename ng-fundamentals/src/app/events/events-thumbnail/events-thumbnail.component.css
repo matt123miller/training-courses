@@ -1,0 +1,10 @@
+.padLeft {
+  margin-left: 15px;
+}
+
+.thumbnail {
+  min-height: 220px;
+}
+.thumbnail div {
+  color: pink;
+}
