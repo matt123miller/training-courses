@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { events } from './eventsListData';
+import { NotificationService } from 'src/app/shared/notification.service';
+import { EventService } from '../shared/events.service';
+
 
 @Component({
   selector: 'events-list',
@@ -7,7 +9,15 @@ import { events } from './eventsListData';
   styleUrls: ['./events-list.component.css'],
 })
 export class EventsListComponent implements OnInit {
-  events = events;
+  events: any[] = [];
 
-  ngOnInit(): void {}
+  constructor(private eventService: EventService, private notificationService: NotificationService) {}
+
+  ngOnInit(): void {
+    this.events = this.eventService.getEvents();
+  }
+
+  handleThumbnailClick(eventName:string) {
+    this.notificationService.info(eventName);
+  }
 }

@@ -5,16 +5,12 @@ import { Component, OnInit, Input, Output } from '@angular/core';
   templateUrl: './events-thumbnail.component.html',
   styleUrls: ['./events-thumbnail.component.css'],
 })
-export class EventsThumbnailComponent implements OnInit {
+export class EventsThumbnailComponent {
   @Input() event: any;
 
-  someProperty: string = 'i am prop2';
+  getTimeClass() {
+    const isEarlyStartTime = this.event?.time === '8:00 am';
 
-  constructor() {}
-
-  ngOnInit(): void {}
-
-  logFoo() {
-    return this.someProperty;
+    return { green: isEarlyStartTime, bold: isEarlyStartTime };
   }
 }
