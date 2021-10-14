@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { NotificationService } from 'src/app/shared/notification.service';
-import { EventService } from '../shared/events.service';
+import { EventService } from '../shared/event.service';
 
 import { EventsListComponent } from './events-list.component';
 
