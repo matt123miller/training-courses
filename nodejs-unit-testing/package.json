@@ -10,7 +10,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "body-parser": "^1.19.0",
+    "body-parser": "^1.20.1",
     "chai": "^4.1.2",
     "chai-as-promised": "^7.1.1",
     "cross-env": "^5.1.6",
@@ -24,7 +24,7 @@
     "supertest": "^3.4.2"
   },
   "dependencies": {
-    "express": "^4.16.4",
+    "express": "^4.18.2",
     "mongoose": "^5.4.15"
   },
   "description": "",
